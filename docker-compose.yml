@@ -28,6 +28,7 @@ services:
       - ./packs.dev:/opt/stackstorm/packs.dev
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
       - ./runtime/st2.d:/st2-docker/st2.d
+      - /mnt/arteria-data/container/.bash_aliases:/root/.bash_aliases
       - /mnt/arteria-data/conf/stackstorm.env:/st2-docker/env
       - /mnt/arteria-data/configs:/opt/stackstorm/configs
       - /mnt/arteria-data/chatops/st2chatops.env:/opt/stackstorm/chatops/st2chatops.env

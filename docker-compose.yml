@@ -21,6 +21,9 @@ services:
       - /mnt/arteria-data/conf/postgres.env
       - /mnt/arteria-data/conf/redis.env
     volumes:
+      - stackstorm-packs-volume:/opt/stackstorm/packs
+      - stackstorm-virtualenvs-volume:/opt/stackstorm/virtualenvs
+      - stackstorm-configs-volume:/opt/stackstorm/configs
       - stackstorm-log-volume:/var/log
       - ./packs.dev:/opt/stackstorm/packs.dev
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
@@ -29,11 +32,10 @@ services:
       - /mnt/arteria-data/configs:/opt/stackstorm/configs
       - /mnt/arteria-data/chatops/st2chatops.env:/opt/stackstorm/chatops/st2chatops.env
       - /mnt/arteria-data/st2.conf:/etc/st2/st2.conf
+      - /mnt/arteria-data/letsencrypt:/etc/letsencrypt
       - /mnt/arteria-data/st2.d/z_activate_components.sh:/st2-docker/st2.d/z_activate_components.sh
       - /mnt/arteria-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
       - /mnt/arteria-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
-      # - /mnt/arteria-data/st2.crt:/etc/ssl/st2/st2.crt
-      # - /mnt/arteria-data/st2.key:/etc/ssl/st2/st2.key
     dns_search: .
     dns: 8.8.8.8
 
@@ -89,6 +91,9 @@ volumes:
   postgres-volume:
   rabbitmq-volume:
   redis-volume:
+  stackstorm-packs-volume:
+  stackstorm-virtualenvs-volume:
+  stackstorm-configs-volume:
   stackstorm-log-volume:
   umccr-pack-volume:
 

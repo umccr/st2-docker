@@ -34,6 +34,7 @@ services:
       - /mnt/arteria-data/st2.conf:/etc/st2/st2.conf
       - /mnt/arteria-data/letsencrypt:/etc/letsencrypt
       - /mnt/arteria-data/st2.d/z_activate_components.sh:/st2-docker/st2.d/z_activate_components.sh
+      - /mnt/arteria-data/entrypoint.d/ssl-setup.sh:/st2-docker/entrypoint.d/ssl-setup.sh
       - /mnt/arteria-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
       - /mnt/arteria-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
     dns_search: .

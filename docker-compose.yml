@@ -21,6 +21,7 @@ services:
       - /mnt/arteria-data/conf/postgres.env
       - /mnt/arteria-data/conf/redis.env
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - stackstorm-packs-volume:/opt/stackstorm/packs
       - stackstorm-virtualenvs-volume:/opt/stackstorm/virtualenvs
       - stackstorm-log-volume:/var/log
@@ -52,6 +53,7 @@ services:
     volumes:
       - mongo-volume:/data/db
       - mongo-configdb-volume:/data/configdb
+      - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
   rabbitmq:
@@ -63,6 +65,7 @@ services:
       - private
     volumes:
       - rabbitmq-volume:/var/lib/rabbitmq
+      - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
   postgres:
@@ -74,6 +77,7 @@ services:
       - private
     volumes:
       - postgres-volume:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
   redis:
@@ -85,6 +89,7 @@ services:
       - private
     volumes:
       - redis-volume:/data
+      - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
     command: [

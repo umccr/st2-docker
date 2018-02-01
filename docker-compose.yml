@@ -25,7 +25,6 @@ services:
       - stackstorm-packs-volume:/opt/stackstorm/packs
       - stackstorm-virtualenvs-volume:/opt/stackstorm/virtualenvs
       - stackstorm-log-volume:/var/log
-      - ./packs.dev:/opt/stackstorm/packs.dev
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
       - ./runtime/st2.d:/st2-docker/st2.d
       - /mnt/arteria-data/container/.bash_aliases:/root/.bash_aliases
@@ -34,8 +33,6 @@ services:
       - /mnt/arteria-data/chatops/st2chatops.env:/opt/stackstorm/chatops/st2chatops.env
       - /mnt/arteria-data/st2.conf:/etc/st2/st2.conf
       - /mnt/arteria-data/letsencrypt:/etc/letsencrypt
-      - /mnt/arteria-data/st2.d/z_activate_components.sh:/st2-docker/st2.d/z_activate_components.sh
-      - /mnt/arteria-data/entrypoint.d/ssl-setup.sh:/st2-docker/entrypoint.d/ssl-setup.sh
       - /mnt/arteria-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
       - /mnt/arteria-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
     dns_search: .

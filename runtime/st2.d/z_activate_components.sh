@@ -1,5 +1,31 @@
 #!/bin/bash
 
+##### set data store key-value pairs
+### Production
+st2 key set runfolder.base.path '/storage/shared/raw/Baymax'
+st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output'
+st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline'
+st2 key set hpc.host 'raijin5.nci.org.au'
+st2 key set hpc.host.user 'rg3930'
+st2 key set slack.channel '#arteria-dev' #change once in production!
+
+### Development
+#st2 key set runfolder.base.path '/storage/shared/raw/Baymax_dev' #proposal
+#st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output_dev' #proposal
+#st2 key set pipeline.data.base.path '/data/cephfs/punim0010/data/Pipeline_dev' #proposal
+#st2 key set hpc.host 'spartan.hpc.unimelb.edu.au'
+#st2 key set hpc.host.user 'brainstorm'
+#st2 key set slack.channel '#arteria-dev'
+
+### Other/global (same for production and development)
+st2 key set novastor.ssh.host '172.19.0.1'
+st2 key set novastor.ssh.user 'limsadmin'
+st2 key set novastor.ssh.port '2222'
+st2 key set novastor.ssh.key.path '/home/stanley/.ssh/stanley_rsa'
+st2 key set samplesheet.check.script '/opt/arteria/runfolder-samplesheet-check.py'
+st2 key set bcl2fastq.run.script '/opt/arteria/run-bcl2fastq.sh'
+
+
 ##### define active sensors
 st2 sensor enable arteria.IncomingSensor
 

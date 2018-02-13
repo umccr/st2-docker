@@ -17,3 +17,4 @@ st2 rule disable examples.sample_rule_with_webhook
 ##### define active actions/workflows
 st2 action enable umccr.sync2hpc
 st2 action enable umccr.bcl2fastq_start
+st2 action enable umccr.samplesheet_check

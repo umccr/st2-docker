@@ -23,8 +23,6 @@ services:
       - /mnt/arteria-data/conf/redis.env
       - /mnt/arteria-data/conf/nginx-letsencrypt-proxy.env
     volumes:
-      - stackstorm-packs-volume:/opt/stackstorm/packs
-      - stackstorm-virtualenvs-volume:/opt/stackstorm/virtualenvs
       - stackstorm-log-volume:/var/log
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
       - ./runtime/st2.d:/st2-docker/st2.d
@@ -168,8 +166,6 @@ volumes:
   postgres-volume:
   rabbitmq-volume:
   redis-volume:
-  stackstorm-packs-volume:
-  stackstorm-virtualenvs-volume:
   stackstorm-log-volume:
 
 networks:

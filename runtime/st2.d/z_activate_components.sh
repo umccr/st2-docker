@@ -28,6 +28,10 @@ st2 key set bcl2fastq.run.script '/opt/arteria/run-bcl2fastq.sh'
 
 ##### define active sensors
 st2 sensor enable arteria.IncomingSensor
+st2 sensor disable examples.EchoFlaskSensor
+st2 sensor disable examples.FibonacciSensor
+st2 sensor disable examples.SamplePollingSensor
+st2 sensor disable examples.SampleSensor
 
 ##### define active rules
 st2 rule enable umccr.umccr-runfolder-notify

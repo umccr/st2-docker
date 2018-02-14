@@ -6,7 +6,7 @@ st2 key set runfolder.base.path '/storage/shared/raw/Baymax'
 st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output'
 st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline'
 st2 key set hpc.host 'raijin5.nci.org.au'
-st2 key set hpc.host.user 'rg3930'
+st2 key set hpc.user 'rg3930'
 st2 key set slack.channel '#arteria-dev' #change once in production!
 
 ### Development

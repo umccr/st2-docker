@@ -22,7 +22,7 @@ st2 key set slack.channel '#arteria-dev' #change once in production!
 ### Other/global (same for production and development)
 st2 key set novastor.ssh.host '172.19.0.1'
 st2 key set novastor.ssh.user 'limsadmin'
-st2 key set novastor.ssh.port '2222'
+st2 key set novastor.ssh.port 2222
 st2 key set novastor.ssh.key.path '/home/stanley/.ssh/stanley_rsa'
 st2 key set samplesheet.check.script '/opt/arteria/runfolder-samplesheet-check.py'
 st2 key set bcl2fastq.run.script '/opt/arteria/run-bcl2fastq.sh'

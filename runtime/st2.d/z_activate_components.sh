@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##### set data store key-value pairs
-### Production
+### Production (NCI)
 st2 key set runfolder.base.path '/storage/shared/raw/Baymax'
 st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output'
 st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline'
@@ -11,12 +11,14 @@ st2 key set hpc.user 'rg3930'
 st2 key set hpc.copy.user 'rg3930'
 st2 key set slack.channel '#arteria-dev' #change once in production!
 
-### Development
+### Development (SPARTAN)
 #st2 key set runfolder.base.path '/storage/shared/raw/Baymax_dev' #proposal
 #st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output_dev' #proposal
 #st2 key set pipeline.data.base.path '/data/cephfs/punim0010/data/Pipeline_dev' #proposal
 #st2 key set hpc.host 'spartan.hpc.unimelb.edu.au'
-#st2 key set hpc.host.user 'brainstorm'
+#st2 key set hpc.copy.host 'spartan.hpc.unimelb.edu.au'
+#st2 key set hpc.user 'brainstorm'
+#st2 key set hpc.copy.user 'brainstorm'
 #st2 key set slack.channel '#arteria-dev'
 
 ### Other/global (same for production and development)
@@ -25,8 +27,9 @@ st2 key set novastor.ssh.user 'limsadmin'
 st2 key set novastor.ssh.port 2222
 st2 key set novastor.ssh.key.path '/home/stanley/.ssh/stanley_rsa'
 st2 key set samplesheet.check.script '/opt/arteria/runfolder-samplesheet-check.py'
-st2 key set bcl2fastq.run.script '/opt/arteria/run-bcl2fastq.sh'
-
+st2 key set bcl2fastq.run.script '/opt/arteria/run-bcl2fastq-test.sh'
+st2 key set checksum.script '/opt/arteria/create-checksums-test.sh'
+st2 key set rsync.script '/opt/arteria/rsync-to-hpc-test.sh'
 
 ##### define active sensors
 st2 sensor enable arteria.IncomingSensor
@@ -47,7 +50,10 @@ st2 rule disable examples.sample_rule_with_actiontrigger
 st2 rule disable examples.sample_rule_with_webhook
 
 ##### define active actions/workflows
-st2 action enable umccr.sync2hpc
+st2 action enable umccr.bcl2fastq_checksums
 st2 action enable umccr.bcl2fastq_start
+st2 action enable umccr.incoming_wf
+st2 action enable umccr.ready_link
+st2 action enable umccr.rsync2hpc
+st2 action enable umccr.runfolder_checksums
 st2 action enable umccr.samplesheet_check
-st2 action enable umccr.novastor_incoming

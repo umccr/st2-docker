@@ -1,35 +1,56 @@
 #!/bin/bash
 
 ##### set data store key-value pairs
-### Production (NCI)
-st2 key set runfolder.base.path '/storage/shared/raw/Baymax'
-st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output'
-st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline'
+
+### production
+# # general
+# st2 key set slack.channel '#biobots'
+# # HPC
+# st2 key set hpc.host 'raijin5.nci.org.au'
+# st2 key set hpc.copy.host 'r-dm.nci.org.au'
+# st2 key set hpc.user 'rg3930'
+# st2 key set hpc.copy.user 'rg3930'
+# st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline/prod'
+# # novastor
+# st2 key set runfolder.base.path '/storage/shared/raw/Baymax'
+# st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output'
+# st2 key set novastor.ssh.host '172.19.0.1'
+# st2 key set novastor.ssh.user 'limsadmin'
+# st2 key set novastor.ssh.port 2222
+# st2 key set novastor.ssh.key.path '/home/stanley/.ssh/stanley_rsa'
+# st2 key set samplesheet.check.script '/opt/Pipeline/prod/scripts/runfolder-samplesheet-check.py'
+# st2 key set bcl2fastq.run.script '/opt/Pipeline/prod/scripts/run-bcl2fastq.sh'
+# st2 key set checksum.script '/opt/Pipeline/prod/scripts/create-checksums.sh'
+# st2 key set rsync.script '/opt/Pipeline/prod/scripts/rsync-to-hpc.sh'
+
+### development
+# General
+st2 key set slack.channel '#arteria-dev'
+# HPC (NCI)
 st2 key set hpc.host 'raijin5.nci.org.au'
 st2 key set hpc.copy.host 'r-dm.nci.org.au'
 st2 key set hpc.user 'rg3930'
 st2 key set hpc.copy.user 'rg3930'
-st2 key set slack.channel '#arteria-dev' #change once in production!
-
-### Development (SPARTAN)
-#st2 key set runfolder.base.path '/storage/shared/raw/Baymax_dev' #proposal
-#st2 key set bcl2fastq.output.base.path '/storage/shared/bcl2fastq_output_dev' #proposal
-#st2 key set pipeline.data.base.path '/data/cephfs/punim0010/data/Pipeline_dev' #proposal
+st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline/dev'
+## HPC (SPARTAN)
 #st2 key set hpc.host 'spartan.hpc.unimelb.edu.au'
 #st2 key set hpc.copy.host 'spartan.hpc.unimelb.edu.au'
 #st2 key set hpc.user 'brainstorm'
 #st2 key set hpc.copy.user 'brainstorm'
-#st2 key set slack.channel '#arteria-dev'
-
-### Other/global (same for production and development)
+#st2 key set pipeline.data.base.path '/data/cephfs/punim0010/data/Pipeline/dev'
+# novastor
+st2 key set runfolder.base.path '/storage/shared/dev/Baymax'
+st2 key set bcl2fastq.output.base.path '/storage/shared/dev/bcl2fastq_output'
 st2 key set novastor.ssh.host '172.19.0.1'
 st2 key set novastor.ssh.user 'limsadmin'
 st2 key set novastor.ssh.port 2222
 st2 key set novastor.ssh.key.path '/home/stanley/.ssh/stanley_rsa'
-st2 key set samplesheet.check.script '/opt/arteria/runfolder-samplesheet-check.py'
-st2 key set bcl2fastq.run.script '/opt/arteria/run-bcl2fastq-test.sh'
-st2 key set checksum.script '/opt/arteria/create-checksums-test.sh'
-st2 key set rsync.script '/opt/arteria/rsync-to-hpc-test.sh'
+st2 key set samplesheet.check.script '/opt/Pipeline/dev/scripts/runfolder-samplesheet-check.py'
+st2 key set bcl2fastq.run.script '/opt/Pipeline/dev/scripts/run-bcl2fastq.sh'
+st2 key set checksum.script '/opt/Pipeline/dev/scripts/create-checksums.sh'
+st2 key set rsync.script '/opt/Pipeline/dev/scripts/rsync-to-hpc.sh'
+
+
 
 ##### define active sensors
 st2 sensor enable arteria.IncomingSensor

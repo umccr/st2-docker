@@ -2,7 +2,7 @@ version: '3'
 
 services:
   stackstorm:
-    image: umccr/stackstorm:latest
+    image: stackstorm/stackstorm:2.6
     container_name: stackstorm
     depends_on:
       - mongo

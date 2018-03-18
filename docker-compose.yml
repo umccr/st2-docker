@@ -23,7 +23,7 @@ services:
       - /mnt/arteria-data/conf/redis.env
       - /mnt/arteria-data/conf/nginx-letsencrypt-proxy.env
     volumes:
-      - stackstorm-log-volume:/var/log
+      - umccr-stackstorm-dockervol-st2-log-volume:/var/log
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
       - ./runtime/st2.d:/st2-docker/st2.d
       - /etc/localtime:/etc/localtime:ro
@@ -47,8 +47,8 @@ services:
     networks:
       - private
     volumes:
-      - mongo-volume:/data/db
-      - mongo-configdb-volume:/data/configdb
+      - umccr-stackstorm-dockervol-mongo-volume:/data/db
+      - umccr-stackstorm-dockervol-mongo-configdb-volume:/data/configdb
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -60,7 +60,7 @@ services:
     networks:
       - private
     volumes:
-      - rabbitmq-volume:/var/lib/rabbitmq
+      - umccr-stackstorm-dockervol-rabbitmq-volume:/var/lib/rabbitmq
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -72,7 +72,7 @@ services:
     networks:
       - private
     volumes:
-      - postgres-volume:/var/lib/postgresql/data
+      - umccr-stackstorm-dockervol-postgres-volume:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -84,7 +84,7 @@ services:
     networks:
       - private
     volumes:
-      - redis-volume:/data
+      - umccr-stackstorm-dockervol-redis-volume:/data
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -161,12 +161,19 @@ services:
 
 
 volumes:
-  mongo-volume:
-  mongo-configdb-volume:
-  postgres-volume:
-  rabbitmq-volume:
-  redis-volume:
-  stackstorm-log-volume:
+  # TODO: possibly use 'external' volumes? (i.e. managed outside of docker-compose)
+  umccr-stackstorm-dockervol-mongo-volume:
+    driver: rexray/ebs
+  umccr-stackstorm-dockervol-mongo-configdb-volume:
+    driver: rexray/ebs
+  umccr-stackstorm-dockervol-postgres-volume:
+    driver: rexray/ebs
+  umccr-stackstorm-dockervol-rabbitmq-volume:
+    driver: rexray/ebs
+  umccr-stackstorm-dockervol-redis-volume:
+    driver: rexray/ebs
+  umccr-stackstorm-dockervol-st2-log-volume:
+    driver: rexray/ebs
 
 networks:
   public:

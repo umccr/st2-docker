@@ -16,24 +16,24 @@ services:
       - private
       - webproxy
     env_file:
-      - /mnt/arteria-data/conf/stackstorm.env
-      - /mnt/arteria-data/conf/mongo.env
-      - /mnt/arteria-data/conf/rabbitmq.env
-      - /mnt/arteria-data/conf/postgres.env
-      - /mnt/arteria-data/conf/redis.env
-      - /mnt/arteria-data/conf/nginx-letsencrypt-proxy.env
+      - /mnt/stackstorm-data/conf/stackstorm.env
+      - /mnt/stackstorm-data/conf/mongo.env
+      - /mnt/stackstorm-data/conf/rabbitmq.env
+      - /mnt/stackstorm-data/conf/postgres.env
+      - /mnt/stackstorm-data/conf/redis.env
+      - /mnt/stackstorm-data/conf/nginx-letsencrypt-proxy.env
     volumes:
-      - umccr-stackstorm-dockervol-st2-log-volume:/var/log
+      - stackstorm-log-volume:/var/log
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
       - ./runtime/st2.d:/st2-docker/st2.d
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/arteria-data/container/.bash_aliases:/root/.bash_aliases
-      - /mnt/arteria-data/conf/stackstorm.env:/st2-docker/env
-      - /mnt/arteria-data/configs:/opt/stackstorm/configs
-      - /mnt/arteria-data/chatops/st2chatops.env:/opt/stackstorm/chatops/st2chatops.env
-      - /mnt/arteria-data/st2.conf:/etc/st2/st2.conf
-      - /mnt/arteria-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
-      - /mnt/arteria-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
+      - /mnt/stackstorm-data/container/.bash_aliases:/root/.bash_aliases
+      - /mnt/stackstorm-data/conf/stackstorm.env:/st2-docker/env
+      - /mnt/stackstorm-data/configs:/opt/stackstorm/configs
+      - /mnt/stackstorm-data/chatops/st2chatops.env:/opt/stackstorm/chatops/st2chatops.env
+      - /mnt/stackstorm-data/st2.conf:/etc/st2/st2.conf
+      - /mnt/stackstorm-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
+      - /mnt/stackstorm-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
     dns_search: .
     dns: 8.8.8.8
 
@@ -43,12 +43,12 @@ services:
     image: mongo:3.4
     container_name: mongo
     env_file:
-      - /mnt/arteria-data/conf/mongo.env
+      - /mnt/stackstorm-data/conf/mongo.env
     networks:
       - private
     volumes:
-      - umccr-stackstorm-dockervol-mongo-volume:/data/db
-      - umccr-stackstorm-dockervol-mongo-configdb-volume:/data/configdb
+      - mongo-volume:/data/db
+      - mongo-configdb-volume:/data/configdb
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -56,11 +56,11 @@ services:
     image: rabbitmq:management
     container_name: rabbitmq
     env_file:
-      - /mnt/arteria-data/conf/rabbitmq.env
+      - /mnt/stackstorm-data/conf/rabbitmq.env
     networks:
       - private
     volumes:
-      - umccr-stackstorm-dockervol-rabbitmq-volume:/var/lib/rabbitmq
+      - rabbitmq-volume:/var/lib/rabbitmq
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -68,11 +68,11 @@ services:
     image: postgres:latest
     container_name: postgres
     env_file:
-      - /mnt/arteria-data/conf/postgres.env
+      - /mnt/stackstorm-data/conf/postgres.env
     networks:
       - private
     volumes:
-      - umccr-stackstorm-dockervol-postgres-volume:/var/lib/postgresql/data
+      - postgres-volume:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -80,11 +80,11 @@ services:
     image: redis:latest
     container_name: redis
     env_file:
-      - /mnt/arteria-data/conf/redis.env
+      - /mnt/stackstorm-data/conf/redis.env
     networks:
       - private
     volumes:
-      - umccr-stackstorm-dockervol-redis-volume:/data
+      - redis-volume:/data
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -161,19 +161,31 @@ services:
 
 
 volumes:
-  # TODO: possibly use 'external' volumes? (i.e. managed outside of docker-compose)
-  umccr-stackstorm-dockervol-mongo-volume:
-    driver: rexray/ebs
-  umccr-stackstorm-dockervol-mongo-configdb-volume:
-    driver: rexray/ebs
-  umccr-stackstorm-dockervol-postgres-volume:
-    driver: rexray/ebs
-  umccr-stackstorm-dockervol-rabbitmq-volume:
-    driver: rexray/ebs
-  umccr-stackstorm-dockervol-redis-volume:
-    driver: rexray/ebs
-  umccr-stackstorm-dockervol-st2-log-volume:
-    driver: rexray/ebs
+  # TODO: move to 'external' volumes, i.e. not managed, but only used by docker
+  mongo-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+  mongo-configdb-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+  postgres-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+  rabbitmq-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+  redis-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
+  stackstorm-log-volume:
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 5
 
 networks:
   public:

@@ -161,31 +161,30 @@ services:
 
 
 volumes:
-  # TODO: move to 'external' volumes, i.e. not managed, but only used by docker
   mongo-volume:
-    # driver: rexray/ebs:latest
-    # driver_opts:
-    #   size: 5
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 1
   mongo-configdb-volume:
-    # driver: rexray/ebs:latest
-    # driver_opts:
-    #   size: 5
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 1
   postgres-volume:
-    # driver: rexray/ebs:latest
-    # driver_opts:
-    #   size: 5
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 1
   rabbitmq-volume:
-    # driver: rexray/ebs:latest
-    # driver_opts:
-    #   size: 5
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 1
   redis-volume:
-    # driver: rexray/ebs:latest
-    # driver_opts:
-    #   size: 5
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 1
   stackstorm-log-volume:
-    # driver: rexray/ebs:latest
-    # driver_opts:
-    #   size: 5
+    driver: rexray/ebs:latest
+    driver_opts:
+      size: 1
 
 networks:
   public:

@@ -13,14 +13,16 @@ st2 key set hpc.host 'spartan.hpc.unimelb.edu.au'
 st2 key set hpc.copy.host 'spartan.hpc.unimelb.edu.au'
 st2 key set hpc.user 'brainstorm'
 st2 key set hpc.copy.user 'brainstorm'
-st2 key set pipeline.data.base.path '/data/cephfs/punim0010/data/Pipeline/dev'
+st2 key set pipeline.data.base.path '/data/cephfs/punim0010/data/Pipeline/prod'
+# st2 key set pipeline.data.base.path '/data/cephfs/punim0010/data/Pipeline/dev'
 # # HPC (NCI)
 # st2 key set hpc.id 'NCI'
 # st2 key set hpc.host 'raijin5.nci.org.au'
 # st2 key set hpc.copy.host 'r-dm.nci.org.au'
 # st2 key set hpc.user 'rg3930'
 # st2 key set hpc.copy.user 'rg3930'
-# st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline/dev'
+# st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline/prod'
+# # st2 key set pipeline.data.base.path '/g/data/gx8/data/Pipeline/dev'
 
 # novastor general
 st2 key set novastor.ssh.host '172.19.0.1'

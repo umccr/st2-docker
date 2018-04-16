@@ -23,7 +23,7 @@ services:
       - /mnt/stackstorm-data/conf/redis.env
       - /mnt/stackstorm-data/conf/nginx-letsencrypt-proxy.env
     volumes:
-      - stackstorm-log-volume:/var/log
+      - /mnt/stackstorm-docker/stackstorm-log-volume:/var/log
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
       - ./runtime/st2.d:/st2-docker/st2.d
       - /etc/localtime:/etc/localtime:ro
@@ -47,8 +47,8 @@ services:
     networks:
       - private
     volumes:
-      - mongo-volume:/data/db
-      - mongo-configdb-volume:/data/configdb
+      - /mnt/stackstorm-docker/mongo-volume:/data/db
+      - /mnt/stackstorm-docker/mongo-configdb-volume:/data/configdb
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -60,7 +60,7 @@ services:
     networks:
       - private
     volumes:
-      - rabbitmq-volume:/var/lib/rabbitmq
+      - /mnt/stackstorm-docker/rabbitmq-volume:/var/lib/rabbitmq
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -72,7 +72,7 @@ services:
     networks:
       - private
     volumes:
-      - postgres-volume:/var/lib/postgresql/data
+      - /mnt/stackstorm-docker/postgres-volume:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -84,7 +84,7 @@ services:
     networks:
       - private
     volumes:
-      - redis-volume:/data
+      - /mnt/stackstorm-docker/redis-volume:/data
       - /etc/localtime:/etc/localtime:ro
     dns_search: .
     dns: 8.8.8.8
@@ -159,32 +159,6 @@ services:
         max-size: ${NGINX_LETSENCRYPT_LOG_MAX_SIZE:-2m}
         max-file: ${NGINX_LETSENCRYPT_LOG_MAX_FILE:-10}
 
-
-volumes:
-  mongo-volume:
-    driver: rexray/ebs:latest
-    driver_opts:
-      size: 1
-  mongo-configdb-volume:
-    driver: rexray/ebs:latest
-    driver_opts:
-      size: 1
-  postgres-volume:
-    driver: rexray/ebs:latest
-    driver_opts:
-      size: 1
-  rabbitmq-volume:
-    driver: rexray/ebs:latest
-    driver_opts:
-      size: 1
-  redis-volume:
-    driver: rexray/ebs:latest
-    driver_opts:
-      size: 1
-  stackstorm-log-volume:
-    driver: rexray/ebs:latest
-    driver_opts:
-      size: 1
 
 networks:
   public:

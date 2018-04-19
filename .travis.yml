@@ -5,6 +5,10 @@ services:
 branches:
   only:
   - master
+notifications:
+  email: false
+  slack:
+    secure: h7wA57Qn3NU+qbUJbE9b89O89ypFBowLkVSCTEgSdjTxDDeVbWI/VN3H3lSw12PNwE7ymUOEnL4A/FdRpWOPWl/TRRxRCEf0GK5MX9hnSh/ViI1x0CZyEfGd7UAS+0yKkabuMwhS45uPpJg7ImApiqy/cj3/nnall4zm5aQQpTAK3WM8TwL+v/7EbrkMe9iQ8oN35k4pB/yCNUHiCAs30JAzZ+Q7WsEAkos5lSG9nh6zH4NvAsaY6PbmwaGGwqGS0HvYR5WKxQNgnUN8vBfE/A/BHup8uYYOmggWOMOWLmHcVJVsp0tYSopB8RSg0Ou/ekiWCM2bXillQYqbv2vCM/vt10twXPD/6FBp9VGM73+OnPnbLOEfpPdn+BDQ8meJ3nCyshrAp8A37a4vvUX41DiRxRUKgCGZ+vrOqnItBjFohTg7szLMHD6a7s6awvRV/ppb7rbLE6FTdTW+lO14joLGrFps3bvu1Do9D1XIu6t+asX2knxJFu7o413UhE/Xum1beb+P7r6wqQwbxXWFI3A7UOjDea85v5hjbsjTJ0LXyfJr45qrDSa5dAyGyDX2OuA8xiZXSJpgyvR33dqhYzEhkzjiVkPYffz9zVLnUHx5eqtLaWGBqnt7Z+WWSQD7gIRdcY1/9kFXh7NCHt7oHHmlBhxPbpmxc8xFZFVJtEE=
 before_script:
 - make env
 - mv docker-compose.yml.local docker-compose.yml
@@ -13,7 +17,5 @@ before_script:
 script:
 - ls -lah
 - docker-compose exec stackstorm st2-run-pack-tests -p /opt/stackstorm/packs/arteria
-notifications:
-  email: false
-  slack:
-    secure: h7wA57Qn3NU+qbUJbE9b89O89ypFBowLkVSCTEgSdjTxDDeVbWI/VN3H3lSw12PNwE7ymUOEnL4A/FdRpWOPWl/TRRxRCEf0GK5MX9hnSh/ViI1x0CZyEfGd7UAS+0yKkabuMwhS45uPpJg7ImApiqy/cj3/nnall4zm5aQQpTAK3WM8TwL+v/7EbrkMe9iQ8oN35k4pB/yCNUHiCAs30JAzZ+Q7WsEAkos5lSG9nh6zH4NvAsaY6PbmwaGGwqGS0HvYR5WKxQNgnUN8vBfE/A/BHup8uYYOmggWOMOWLmHcVJVsp0tYSopB8RSg0Ou/ekiWCM2bXillQYqbv2vCM/vt10twXPD/6FBp9VGM73+OnPnbLOEfpPdn+BDQ8meJ3nCyshrAp8A37a4vvUX41DiRxRUKgCGZ+vrOqnItBjFohTg7szLMHD6a7s6awvRV/ppb7rbLE6FTdTW+lO14joLGrFps3bvu1Do9D1XIu6t+asX2knxJFu7o413UhE/Xum1beb+P7r6wqQwbxXWFI3A7UOjDea85v5hjbsjTJ0LXyfJr45qrDSa5dAyGyDX2OuA8xiZXSJpgyvR33dqhYzEhkzjiVkPYffz9zVLnUHx5eqtLaWGBqnt7Z+WWSQD7gIRdcY1/9kFXh7NCHt7oHHmlBhxPbpmxc8xFZFVJtEE=
+after_success:
+  - ./travis-remote-trigger.sh

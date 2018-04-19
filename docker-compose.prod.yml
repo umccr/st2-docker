@@ -16,24 +16,24 @@ services:
       - private
       - webproxy
     env_file:
-      - /mnt/arteria-data/conf/stackstorm.env
-      - /mnt/arteria-data/conf/mongo.env
-      - /mnt/arteria-data/conf/rabbitmq.env
-      - /mnt/arteria-data/conf/postgres.env
-      - /mnt/arteria-data/conf/redis.env
-      - /mnt/arteria-data/conf/nginx-letsencrypt-proxy.env
+      - /mnt/stackstorm-data/conf/stackstorm.env
+      - /mnt/stackstorm-data/conf/mongo.env
+      - /mnt/stackstorm-data/conf/rabbitmq.env
+      - /mnt/stackstorm-data/conf/postgres.env
+      - /mnt/stackstorm-data/conf/redis.env
+      - /mnt/stackstorm-data/conf/nginx-letsencrypt-proxy.env
     volumes:
       - stackstorm-log-volume:/var/log
       - ./runtime/entrypoint.d:/st2-docker/entrypoint.d
       - ./runtime/st2.d:/st2-docker/st2.d
       - /etc/localtime:/etc/localtime:ro
-      - /mnt/arteria-data/container/.bash_aliases:/root/.bash_aliases
-      - /mnt/arteria-data/conf/stackstorm.env:/st2-docker/env
-      - /mnt/arteria-data/configs:/opt/stackstorm/configs
-      - /mnt/arteria-data/chatops/st2chatops.env:/opt/stackstorm/chatops/st2chatops.env
-      - /mnt/arteria-data/st2.conf:/etc/st2/st2.conf
-      - /mnt/arteria-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
-      - /mnt/arteria-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
+      - /mnt/stackstorm-data/container/.bash_aliases:/root/.bash_aliases
+      - /mnt/stackstorm-data/conf/stackstorm.env:/st2-docker/env
+      - /mnt/stackstorm-data/configs:/opt/stackstorm/configs
+      - /mnt/stackstorm-data/chatops/st2chatops.env:/opt/stackstorm/chatops/st2chatops.env
+      - /mnt/stackstorm-data/st2.conf:/etc/st2/st2.conf
+      - /mnt/stackstorm-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
+      - /mnt/stackstorm-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
     dns_search: .
     dns: 8.8.8.8
 
@@ -43,7 +43,7 @@ services:
     image: mongo:3.4
     container_name: mongo
     env_file:
-      - /mnt/arteria-data/conf/mongo.env
+      - /mnt/stackstorm-data/conf/mongo.env
     networks:
       - private
     volumes:
@@ -56,7 +56,7 @@ services:
     image: rabbitmq:management
     container_name: rabbitmq
     env_file:
-      - /mnt/arteria-data/conf/rabbitmq.env
+      - /mnt/stackstorm-data/conf/rabbitmq.env
     networks:
       - private
     volumes:
@@ -68,7 +68,7 @@ services:
     image: postgres:latest
     container_name: postgres
     env_file:
-      - /mnt/arteria-data/conf/postgres.env
+      - /mnt/stackstorm-data/conf/postgres.env
     networks:
       - private
     volumes:
@@ -80,7 +80,7 @@ services:
     image: redis:latest
     container_name: redis
     env_file:
-      - /mnt/arteria-data/conf/redis.env
+      - /mnt/stackstorm-data/conf/redis.env
     networks:
       - private
     volumes:
@@ -158,7 +158,6 @@ services:
       options:
         max-size: ${NGINX_LETSENCRYPT_LOG_MAX_SIZE:-2m}
         max-file: ${NGINX_LETSENCRYPT_LOG_MAX_FILE:-10}
-
 
 volumes:
   mongo-volume:

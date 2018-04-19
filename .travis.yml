@@ -12,7 +12,8 @@ notifications:
 before_script:
 - make env
 - ln -sf docker-compose.local.yml docker-compose.yml
-- docker-compose pull -q --parallel
+- ls -al
+- docker-compose pull --quiet --parallel
 - docker-compose up -d
 script:
 - ls -lah

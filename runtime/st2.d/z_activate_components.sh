@@ -44,7 +44,12 @@ st2 key set rsync.script '/opt/Pipeline/prod/scripts/rsync-to-hpc.sh'
 # st2 key set checksum.script '/opt/Pipeline/dev/scripts/create-checksums.sh'
 # st2 key set rsync.script '/opt/Pipeline/dev/scripts/rsync-to-hpc.sh'
 
-
+# PCGR
+st2 key set pcgr.ami 'ami-06b6187d6441a6dbf'
+# st2 key set pcgr.bucket 'umccr-pcgr-dev'
+st2 key set pcgr.bucket 'umccr-pcgr-prod'
+# st2 key set pcgr.instance_profile 'pcgr_instance_profile_dev'
+st2 key set pcgr.instance_profile 'pcgr_instance_profile_prod'
 
 ##### define active sensors
 st2 sensor enable arteria.IncomingSensor

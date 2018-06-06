@@ -34,6 +34,7 @@ services:
       - /mnt/stackstorm-data/st2.conf:/etc/st2/st2.conf
       - /mnt/stackstorm-data/ssh/stanley_rsa:/home/stanley/.ssh/stanley_rsa
       - /mnt/stackstorm-data/ssh/stanley_rsa.pub:/home/stanley/.ssh/stanley_rsa.pub
+      - /mnt/stackstorm-data/st2.d/z_activate_components.sh:/st2-docker/st2.d/z_activate_components.sh
     dns_search: .
     dns: 8.8.8.8
 

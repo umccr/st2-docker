@@ -172,7 +172,16 @@ volumes:
 networks:
   public:
     driver: bridge
+    ipam:
+     config:
+       - subnet: 172.19.0.0/16
   private:
     driver: bridge
+    ipam:
+     config:
+       - subnet: 172.20.0.0/16
   webproxy:
     driver: bridge
+    ipam:
+     config:
+       - subnet: 172.21.0.0/16

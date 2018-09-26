@@ -183,5 +183,5 @@ networks:
   webproxy:
     driver: bridge
     ipam:
-     config:
+     config: # this needs to match the letsencrypt setting in ./data/conf.d/default.conf
        - subnet: 172.21.0.0/16

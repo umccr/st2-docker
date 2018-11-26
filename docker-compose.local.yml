@@ -54,7 +54,7 @@ services:
     dns_search: .
     dns: 8.8.8.8
   postgres:
-    image: postgres:latest
+    image: postgres:10
     container_name: postgres
     env_file:
       - conf/postgres.env
